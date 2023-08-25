@@ -1,0 +1,38 @@
+# action.yml
+name: 'DigitalOcean Spaces Upload Action'
+description: 'Upload directories/files to DigitalOcean Spaces via GitHub Actions. Supports package/library versioning.'
+author: "billgo <hi@billgo.me>"
+branding:
+  icon: "message-circle"
+  color: "blue"
+inputs:
+  source:
+    description: 'Source directory/file to upload'
+    required: true
+  out_dir:
+    description: 'Output folder in your DO space'
+    required: false
+  space_name:
+    description: 'Name of your DO space'
+    required: true
+  space_region:
+    description: 'Region of your DO space'
+    required: true
+  access_key:
+    description: 'DO access key'
+    required: true
+  secret_key:
+    description: 'DO secret key'
+    required: true
+  versioning:
+    description: 'Use packge.json version as sub directory'
+    required: false
+  cdn_domain:
+    description: 'DO Spaces CDN domain'
+    required: false
+  permission:
+    description: 'DO secret key'
+    required: false
+runs:
+  using: "node16"
+  main: "lib/index.js"
