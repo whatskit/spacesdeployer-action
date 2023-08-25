@@ -2,14 +2,14 @@ import * as core from "@actions/core";
 import path from "path";
 import fs from "fs";
 
+import S3 from "./s3";
 import config from "./config";
-import S3 from "./interface";
 import { forEach, getVersion } from "./helpers";
 
 const run = async () => {
 	const shouldVersion = config.versioning !== "false";
 
-	let destination = config.destination;
+	let destination = config.destination.startsWith("/") ? config.destination.substring(1) : config.destination;
 	if (shouldVersion) {
 		const version = getVersion(config.versioning);
 
@@ -21,15 +21,17 @@ const run = async () => {
 	core.debug(destination);
 
 	const s3 = new S3({
-		bucket: config.spaceName,
 		region: config.spaceRegion,
 		access_key: config.accessKey,
 		secret_key: config.secretKey,
-		permission: config.permission,
 	});
 
 	const fileStat = await fs.promises.stat(config.source);
 	const isFile = fileStat.isFile();
+
+	const deleteLocation = `${config.destination}/${config.forcedDir}`;
+	core.debug("Removing folder: " + deleteLocation);
+	await s3.deleteFolder(deleteLocation);
 
 	if (isFile) {
 		const fileName = path.basename(config.source);

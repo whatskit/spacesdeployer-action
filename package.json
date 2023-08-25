@@ -1,7 +1,7 @@
 {
   "name": "@whatskit/spacesdeployer-action",
   "description": "Upload directories/files to DigitalOcean Spaces via GitHub Actions. Supports package/library versioning.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "author": "Billgo <hi@billgo.me>",
   "bugs": "https://github.com/whatskit/spacesdeployer-action/issues",
@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@actions/core": "^1.10.0",
+    "@aws-sdk/client-s3": "^3.398.0",
     "action-input-parser": "^1.2.38",
-    "aws-sdk": "^2.1444.0",
     "mime-types": "^2.1.35"
   },
   "devDependencies": {

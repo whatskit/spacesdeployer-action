@@ -9,13 +9,13 @@ const config = {
 			return path.join(process.cwd(), val);
 		},
 	}),
-	exclude: getInput({
-		key: "exclude",
-		default: "subapp/*",
-	}),
 	destination: getInput({
 		key: "destination",
 		default: "",
+	}),
+	forcedDir: getInput({
+		key: "forced_dir",
+		default: "static",
 	}),
 	spaceName: getInput({
 		key: "space_name",
